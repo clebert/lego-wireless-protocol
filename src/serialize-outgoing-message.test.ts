@@ -3,10 +3,13 @@ import {
   serializeOutgoingMessage
 } from './serialize-outgoing-message';
 
-function assert(data: number[], outgoingMessage: OutgoingMessage): void {
+function assert(
+  outgoingMessageData: number[],
+  outgoingMessage: OutgoingMessage
+): void {
   expect([
     ...new Uint8Array(serializeOutgoingMessage(outgoingMessage))
-  ]).toEqual(data);
+  ]).toEqual(outgoingMessageData);
 }
 
 describe('serializeOutgoingMessage()', () => {

@@ -1,9 +1,12 @@
 import {IncomingMessage, parseIncomingMessage} from './parse-incoming-message';
 
-function assert(data: number[], incomingMessage: IncomingMessage): void {
-  expect(parseIncomingMessage(Uint8Array.from(data).buffer)).toEqual(
-    incomingMessage
-  );
+function assert(
+  incomingMessageData: number[],
+  incomingMessage: IncomingMessage
+): void {
+  expect(
+    parseIncomingMessage(Uint8Array.from(incomingMessageData).buffer)
+  ).toEqual(incomingMessage);
 }
 
 describe('parseIncomingMessage()', () => {

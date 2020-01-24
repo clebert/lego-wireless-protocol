@@ -1,9 +1,10 @@
 const assert = require('assert');
 const {parseIncomingMessage, serializeOutgoingMessage} = require('./lib');
 
-const incomingMessage = parseIncomingMessage(
-  Uint8Array.from([9, 0, 4, 16, 2, 39, 0, 0, 1]).buffer
-);
+const incomingMessageData = Uint8Array.from([9, 0, 4, 16, 2, 39, 0, 0, 1])
+  .buffer;
+
+const incomingMessage = parseIncomingMessage(incomingMessageData);
 
 assert.deepEqual(incomingMessage, {
   messageType: 'HubAttachedIo',
@@ -14,10 +15,10 @@ assert.deepEqual(incomingMessage, {
   portB: {portType: 'External', portId: 1}
 });
 
-const data = serializeOutgoingMessage({
+const outgoingMessageData = serializeOutgoingMessage({
   messageType: 'PortInformationRequest',
   portId: 0,
   portInformationRequestType: 'ModeInfo'
 });
 
-assert.deepEqual([...new Uint8Array(data)], [5, 0, 33, 0, 1]);
+assert.deepEqual([...new Uint8Array(outgoingMessageData)], [5, 0, 33, 0, 1]);

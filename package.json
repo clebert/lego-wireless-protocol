@@ -2,7 +2,9 @@
   "name": "lego-wireless-protocol",
   "version": "0.0.0",
   "description": "A partial implementation of the LEGO wireless protocol using JavaScript.",
-  "keywords": ["TODO"],
+  "keywords": [
+    "TODO"
+  ],
   "bugs": {
     "url": "https://github.com/clebert/lego-wireless-protocol/issues"
   },

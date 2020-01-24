@@ -6,15 +6,17 @@ import {OutgoingMessage} from './types';
 
 export * from './types';
 
-export function serializeOutgoingMessage(message: OutgoingMessage): Buffer {
-  switch (message.messageType) {
+export function serializeOutgoingMessage(
+  outgoingMessage: OutgoingMessage
+): Buffer {
+  switch (outgoingMessage.messageType) {
     case 'PortInformationRequest':
-      return serializePortInformationRequest(message);
+      return serializePortInformationRequest(outgoingMessage);
     case 'PortInputFormatSetup':
-      return serializePortInputFormatSetup(message);
+      return serializePortInputFormatSetup(outgoingMessage);
     case 'PortModeInformationRequest':
-      return serializePortModeInformationRequest(message);
+      return serializePortModeInformationRequest(outgoingMessage);
     case 'PortOutputCommand':
-      return serializePortOutputCommand(message);
+      return serializePortOutputCommand(outgoingMessage);
   }
 }

@@ -1,9 +1,9 @@
 import {PortInformationRequestOutgoingMessage} from './types';
 
 export function serializePortInformationRequest(
-  message: PortInformationRequestOutgoingMessage
+  outgoingMessage: PortInformationRequestOutgoingMessage
 ): Buffer {
-  const {portId, portInformationRequestType} = message;
+  const {portId, portInformationRequestType} = outgoingMessage;
   const data = Buffer.alloc(5);
 
   data.writeUInt8(data.length, 0);

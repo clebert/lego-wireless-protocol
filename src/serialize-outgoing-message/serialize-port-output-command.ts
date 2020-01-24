@@ -1,9 +1,9 @@
 import {PortOutputCommandOutgoingMessage} from './types';
 
 export function serializePortOutputCommand(
-  message: PortOutputCommandOutgoingMessage
+  outgoingMessage: PortOutputCommandOutgoingMessage
 ): Buffer {
-  const {portId, portOutputSubCommandData} = message;
+  const {portId, portOutputSubCommandData} = outgoingMessage;
   const data = Buffer.alloc(5 + portOutputSubCommandData.length);
 
   data.writeUInt8(data.length, 0);

@@ -1,9 +1,9 @@
 import {PortInputFormatSetupOutgoingMessage} from './types';
 
 export function serializePortInputFormatSetup(
-  message: PortInputFormatSetupOutgoingMessage
+  outgoingMessage: PortInputFormatSetupOutgoingMessage
 ): Buffer {
-  const {portId, modeId, deltaInterval, notificationsEnabled} = message;
+  const {portId, modeId, deltaInterval, notificationsEnabled} = outgoingMessage;
   const data = Buffer.alloc(10);
 
   data.writeUInt8(data.length, 0);

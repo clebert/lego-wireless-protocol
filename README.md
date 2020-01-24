@@ -78,7 +78,7 @@ function parseIncomingMessage(data: Buffer): IncomingMessage;
 ```
 
 ```ts
-function serializeOutgoingMessage(message: OutgoingMessage): Buffer;
+function serializeOutgoingMessage(outgoingMessage: OutgoingMessage): Buffer;
 ```
 
 ### `IncomingMessage`

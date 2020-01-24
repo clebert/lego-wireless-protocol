@@ -2,34 +2,35 @@ import {PortModeInformationRequestOutgoingMessage} from './types';
 
 export function serializePortModeInformationRequest(
   outgoingMessage: PortModeInformationRequestOutgoingMessage
-): Buffer {
+): ArrayBuffer {
   const {portId, modeId, portModeInformationRequestType} = outgoingMessage;
-  const data = Buffer.alloc(6);
+  const data = new ArrayBuffer(6);
+  const dataView = new DataView(data);
 
-  data.writeUInt8(data.length, 0);
-  data.writeUInt8(0, 1);
-  data.writeUInt8(0x22, 2);
-  data.writeUInt8(portId, 3);
-  data.writeUInt8(modeId, 4);
+  dataView.setUint8(0, data.byteLength);
+  dataView.setUint8(1, 0);
+  dataView.setUint8(2, 0x22);
+  dataView.setUint8(3, portId);
+  dataView.setUint8(4, modeId);
 
   switch (portModeInformationRequestType) {
     case 'Name':
-      data.writeUInt8(0x00, 5);
+      dataView.setUint8(5, 0x00);
       break;
     case 'Raw':
-      data.writeUInt8(0x01, 5);
+      dataView.setUint8(5, 0x01);
       break;
     case 'Pct':
-      data.writeUInt8(0x02, 5);
+      dataView.setUint8(5, 0x02);
       break;
     case 'Si':
-      data.writeUInt8(0x03, 5);
+      dataView.setUint8(5, 0x03);
       break;
     case 'Symbol':
-      data.writeUInt8(0x04, 5);
+      dataView.setUint8(5, 0x04);
       break;
     case 'ValueFormat':
-      data.writeUInt8(0x80, 5);
+      dataView.setUint8(5, 0x80);
   }
 
   return data;

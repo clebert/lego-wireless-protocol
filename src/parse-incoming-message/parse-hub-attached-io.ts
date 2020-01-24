@@ -43,15 +43,17 @@ function createIoType(ioTypeId: number): IoType {
   return 'Unknown';
 }
 
-export function parseHubAttachedIo(data: Buffer): HubAttachedIoIncomingMessage {
-  const port = createPort(data.readUInt8(0));
-  const eventTypeId = data.readUInt8(1);
+export function parseHubAttachedIo(
+  dataView: DataView
+): HubAttachedIoIncomingMessage {
+  const port = createPort(dataView.getUint8(0));
+  const eventTypeId = dataView.getUint8(1);
 
   if (eventTypeId === 0) {
     return {messageType: 'HubAttachedIo', port, eventType: 'HubDetachedIo'};
   }
 
-  const ioType = createIoType(data.readUInt16LE(2));
+  const ioType = createIoType(dataView.getUint16(2, true));
 
   if (eventTypeId === 1) {
     return {
@@ -62,8 +64,8 @@ export function parseHubAttachedIo(data: Buffer): HubAttachedIoIncomingMessage {
     };
   }
 
-  const portA = createPort(data.readUInt8(4));
-  const portB = createPort(data.readUInt8(5));
+  const portA = createPort(dataView.getUint8(4));
+  const portB = createPort(dataView.getUint8(5));
 
   return {
     messageType: 'HubAttachedIo',

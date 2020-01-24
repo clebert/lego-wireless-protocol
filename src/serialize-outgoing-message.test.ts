@@ -4,7 +4,9 @@ import {
 } from './serialize-outgoing-message';
 
 function assert(data: number[], outgoingMessage: OutgoingMessage): void {
-  expect(serializeOutgoingMessage(outgoingMessage)).toEqual(Buffer.from(data));
+  expect([
+    ...new Uint8Array(serializeOutgoingMessage(outgoingMessage))
+  ]).toEqual(data);
 }
 
 describe('serializeOutgoingMessage()', () => {
@@ -39,7 +41,7 @@ describe('serializeOutgoingMessage()', () => {
     assert([10, 0, 129, 0, 16, 81, 1, 255, 0, 0], {
       messageType: 'PortOutputCommand',
       portId: 0,
-      portOutputSubCommandData: Buffer.from([81, 1, 255, 0, 0])
+      portOutputSubCommandData: Uint8Array.from([81, 1, 255, 0, 0]).buffer
     });
   });
 });

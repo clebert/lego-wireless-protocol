@@ -8,7 +8,7 @@ export * from './types';
 
 export function serializeOutgoingMessage(
   outgoingMessage: OutgoingMessage
-): Buffer {
+): ArrayBuffer {
   switch (outgoingMessage.messageType) {
     case 'PortInformationRequest':
       return serializePortInformationRequest(outgoingMessage);

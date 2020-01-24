@@ -46,13 +46,13 @@ function createPortModeInformationType(
 }
 
 export function parsePortModeInformation(
-  data: Buffer
+  dataView: DataView
 ): PortModeInformationIncomingMessage {
-  const portId = data.readUInt8(0);
-  const modeId = data.readUInt8(1);
+  const portId = dataView.getUint8(0);
+  const modeId = dataView.getUint8(1);
 
   const portModeInformationType = createPortModeInformationType(
-    data.readUInt8(2)
+    dataView.getUint8(2)
   );
 
   if (portModeInformationType === 'Name') {
@@ -61,9 +61,8 @@ export function parsePortModeInformation(
       portId,
       modeId,
       portModeInformationType,
-      name: data
-        .slice(3)
-        .toString()
+      name: String.fromCharCode
+        .apply(null, [...new Uint8Array(dataView.buffer.slice(3))])
         .replace(/\0/g, '')
     };
   }
@@ -74,7 +73,7 @@ export function parsePortModeInformation(
       portId,
       modeId,
       portModeInformationType,
-      rawRange: [data.readFloatLE(3), data.readFloatLE(7)]
+      rawRange: [dataView.getFloat32(3, true), dataView.getFloat32(7, true)]
     };
   }
 
@@ -84,7 +83,7 @@ export function parsePortModeInformation(
       portId,
       modeId,
       portModeInformationType,
-      pctRange: [data.readFloatLE(3), data.readFloatLE(7)]
+      pctRange: [dataView.getFloat32(3, true), dataView.getFloat32(7, true)]
     };
   }
 
@@ -94,7 +93,7 @@ export function parsePortModeInformation(
       portId,
       modeId,
       portModeInformationType,
-      siRange: [data.readFloatLE(3), data.readFloatLE(7)]
+      siRange: [dataView.getFloat32(3, true), dataView.getFloat32(7, true)]
     };
   }
 
@@ -104,9 +103,8 @@ export function parsePortModeInformation(
       portId,
       modeId,
       portModeInformationType,
-      symbol: data
-        .slice(3)
-        .toString()
+      symbol: String.fromCharCode
+        .apply(null, [...new Uint8Array(dataView.buffer.slice(3))])
         .replace(/\0/g, '')
     };
   }
@@ -118,8 +116,8 @@ export function parsePortModeInformation(
       modeId,
       portModeInformationType,
       valueFormat: {
-        numberOfDatasets: data.readUInt8(3),
-        datasetType: createDatasetType(data.readUInt8(4))
+        numberOfDatasets: dataView.getUint8(3),
+        datasetType: createDatasetType(dataView.getUint8(4))
       }
     };
   }

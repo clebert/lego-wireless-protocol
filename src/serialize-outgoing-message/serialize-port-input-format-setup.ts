@@ -2,17 +2,18 @@ import {PortInputFormatSetupOutgoingMessage} from './types';
 
 export function serializePortInputFormatSetup(
   outgoingMessage: PortInputFormatSetupOutgoingMessage
-): Buffer {
+): ArrayBuffer {
   const {portId, modeId, deltaInterval, notificationsEnabled} = outgoingMessage;
-  const data = Buffer.alloc(10);
+  const data = new ArrayBuffer(10);
+  const dataView = new DataView(data);
 
-  data.writeUInt8(data.length, 0);
-  data.writeUInt8(0, 1);
-  data.writeUInt8(0x41, 2);
-  data.writeUInt8(portId, 3);
-  data.writeUInt8(modeId, 4);
-  data.writeUInt32LE(deltaInterval, 5);
-  data.writeUInt8(notificationsEnabled ? 1 : 0, 9);
+  dataView.setUint8(0, data.byteLength);
+  dataView.setUint8(1, 0);
+  dataView.setUint8(2, 0x41);
+  dataView.setUint8(3, portId);
+  dataView.setUint8(4, modeId);
+  dataView.setUint32(5, deltaInterval, true);
+  dataView.setUint8(9, notificationsEnabled ? 1 : 0);
 
   return data;
 }

@@ -48,5 +48,5 @@ export interface PortInputFormatSetupOutgoingMessage {
 export interface PortOutputCommandOutgoingMessage {
   readonly messageType: 'PortOutputCommand'; // 0x81
   readonly portId: number;
-  readonly portOutputSubCommandData: Buffer;
+  readonly portOutputSubCommandData: ArrayBuffer;
 }

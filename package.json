@@ -3,7 +3,15 @@
   "version": "0.0.0",
   "description": "A partial implementation of the LEGO wireless protocol using JavaScript.",
   "keywords": [
-    "TODO"
+    "BOOST",
+    "Bluetooth",
+    "CONTROL+",
+    "LEGO",
+    "LPF2",
+    "Power Functions",
+    "Powered Up",
+    "SPIKE Prime",
+    "robot"
   ],
   "bugs": {
     "url": "https://github.com/clebert/lego-wireless-protocol/issues"

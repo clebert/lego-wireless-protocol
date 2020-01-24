@@ -1,42 +1,11 @@
-export type ErrorCode =
-  | 'Ack'
-  | 'Mack'
-  | 'BufferOverflow'
-  | 'Timeout'
-  | 'CommandNotRecognized'
-  | 'InvalidUse'
-  | 'Overcurrent'
-  | 'InternalError'
-  | 'Unknown';
-
-export type IoType =
-  | 'Motor'
-  | 'SystemTrainMotor'
-  | 'Button'
-  | 'LedLight'
-  | 'Voltage'
-  | 'Current'
-  | 'PiezoTone'
-  | 'RgbLight'
-  | 'ExternalTiltSensor'
-  | 'MotionSensor'
-  | 'VisionSensor'
-  | 'ExternalMotorWithTacho'
-  | 'InternalMotorWithTacho'
-  | 'InternalTilt'
-  | 'Unknown';
-
-export interface Port {
-  readonly portType: 'External' | 'Internal' | 'Reserved';
-  readonly portId: number;
-}
-
-export type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
-
-export interface ValueFormat {
-  readonly datasetType: DatasetType;
-  readonly numberOfDatasets: number;
-}
+export type IncomingMessage =
+  | HubAttachedIoIncomingMessage
+  | ErrorIncomingMessage
+  | PortInformationIncomingMessage
+  | PortModeInformationIncomingMessage
+  | PortValueIncomingMessage
+  | PortInputFormatIncomingMessage
+  | UnknownIncomingMessage;
 
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#hub-attached-i-o
@@ -62,6 +31,28 @@ export type HubAttachedIoIncomingMessage = {
     }
 );
 
+export interface Port {
+  readonly portType: 'External' | 'Internal' | 'Reserved';
+  readonly portId: number;
+}
+
+export type IoType =
+  | 'Motor'
+  | 'SystemTrainMotor'
+  | 'Button'
+  | 'LedLight'
+  | 'Voltage'
+  | 'Current'
+  | 'PiezoTone'
+  | 'RgbLight'
+  | 'ExternalTiltSensor'
+  | 'MotionSensor'
+  | 'VisionSensor'
+  | 'ExternalMotorWithTacho'
+  | 'InternalMotorWithTacho'
+  | 'InternalTilt'
+  | 'Unknown';
+
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/#generic-error-messages
  */
@@ -70,6 +61,17 @@ export interface ErrorIncomingMessage {
   readonly commandTypeId: number;
   readonly errorCode: ErrorCode;
 }
+
+export type ErrorCode =
+  | 'Ack'
+  | 'Mack'
+  | 'BufferOverflow'
+  | 'Timeout'
+  | 'CommandNotRecognized'
+  | 'InvalidUse'
+  | 'Overcurrent'
+  | 'InternalError'
+  | 'Unknown';
 
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-information
@@ -126,6 +128,13 @@ export type PortModeInformationIncomingMessage = {
     }
 );
 
+export interface ValueFormat {
+  readonly datasetType: DatasetType;
+  readonly numberOfDatasets: number;
+}
+
+export type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
+
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-value-single
  */
@@ -149,12 +158,3 @@ export interface PortInputFormatIncomingMessage {
 export interface UnknownIncomingMessage {
   readonly messageType: 'Unknown';
 }
-
-export type IncomingMessage =
-  | HubAttachedIoIncomingMessage
-  | ErrorIncomingMessage
-  | PortInformationIncomingMessage
-  | PortModeInformationIncomingMessage
-  | PortValueIncomingMessage
-  | PortInputFormatIncomingMessage
-  | UnknownIncomingMessage;

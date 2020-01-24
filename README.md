@@ -232,12 +232,12 @@ type PortModeInformationIncomingMessage = {
     }
 );
 
-type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
-
 interface ValueFormat {
   readonly datasetType: DatasetType;
   readonly numberOfDatasets: number;
 }
+
+type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
 ```
 
 </details>

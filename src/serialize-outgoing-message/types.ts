@@ -1,10 +1,8 @@
-export type PortModeInformationRequestType =
-  | 'Name'
-  | 'Raw'
-  | 'Pct'
-  | 'Si'
-  | 'Symbol'
-  | 'ValueFormat';
+export type OutgoingMessage =
+  | PortInformationRequestOutgoingMessage
+  | PortModeInformationRequestOutgoingMessage
+  | PortInputFormatSetupOutgoingMessage
+  | PortOutputCommandOutgoingMessage;
 
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-information-request
@@ -25,6 +23,14 @@ export interface PortModeInformationRequestOutgoingMessage {
   readonly portModeInformationRequestType: PortModeInformationRequestType;
 }
 
+export type PortModeInformationRequestType =
+  | 'Name'
+  | 'Raw'
+  | 'Pct'
+  | 'Si'
+  | 'Symbol'
+  | 'ValueFormat';
+
 /**
  * https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-input-format-setup-single
  */
@@ -44,9 +50,3 @@ export interface PortOutputCommandOutgoingMessage {
   readonly portId: number;
   readonly portOutputSubCommandData: Buffer;
 }
-
-export type OutgoingMessage =
-  | PortInformationRequestOutgoingMessage
-  | PortModeInformationRequestOutgoingMessage
-  | PortInputFormatSetupOutgoingMessage
-  | PortOutputCommandOutgoingMessage;

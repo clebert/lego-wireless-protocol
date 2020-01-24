@@ -96,6 +96,8 @@ type IncomingMessage =
 
 #### [`HubAttachedIoIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#hub-attached-i-o)
 
+<details><summary>Show Type</summary>
+
 ```ts
 type HubAttachedIoIncomingMessage = {
   readonly messageType: 'HubAttachedIo';
@@ -141,7 +143,11 @@ type IoType =
   | 'Unknown';
 ```
 
+</details>
+
 #### [`ErrorIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/#generic-error-messages)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface ErrorIncomingMessage {
@@ -162,7 +168,11 @@ type ErrorCode =
   | 'Unknown';
 ```
 
+</details>
+
 #### [`PortInformationIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-information)
+
+<details><summary>Show Type</summary>
 
 ```ts
 type PortInformationIncomingMessage = {
@@ -181,7 +191,11 @@ type PortInformationIncomingMessage = {
 );
 ```
 
+</details>
+
 #### [`PortModeInformationIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-mode-information)
+
+<details><summary>Show Type</summary>
 
 ```ts
 type PortModeInformationIncomingMessage = {
@@ -226,7 +240,11 @@ interface ValueFormat {
 }
 ```
 
+</details>
+
 #### [`PortValueIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-value-single)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface PortValueIncomingMessage {
@@ -236,7 +254,11 @@ interface PortValueIncomingMessage {
 }
 ```
 
+</details>
+
 #### [`PortInputFormatIncomingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-input-format-single)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface PortInputFormatIncomingMessage {
@@ -248,13 +270,19 @@ interface PortInputFormatIncomingMessage {
 }
 ```
 
+</details>
+
 #### `UnknownIncomingMessage`
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface UnknownIncomingMessage {
   readonly messageType: 'Unknown';
 }
 ```
+
+</details>
 
 ### `OutgoingMessage`
 
@@ -268,6 +296,8 @@ type OutgoingMessage =
 
 #### [`PortInformationRequestOutgoingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-information-request)
 
+<details><summary>Show Type</summary>
+
 ```ts
 interface PortInformationRequestOutgoingMessage {
   readonly messageType: 'PortInformationRequest';
@@ -276,7 +306,11 @@ interface PortInformationRequestOutgoingMessage {
 }
 ```
 
+</details>
+
 #### [`PortModeInformationRequestOutgoingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-mode-information-request)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface PortModeInformationRequestOutgoingMessage {
@@ -295,7 +329,11 @@ type PortModeInformationRequestType =
   | 'ValueFormat';
 ```
 
+</details>
+
 #### [`PortInputFormatSetupOutgoingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-input-format-setup-single)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface PortInputFormatSetupOutgoingMessage {
@@ -307,7 +345,11 @@ interface PortInputFormatSetupOutgoingMessage {
 }
 ```
 
+</details>
+
 #### [`PortOutputCommandOutgoingMessage`](https://lego.github.io/lego-ble-wireless-protocol-docs/index.html#port-output-command)
+
+<details><summary>Show Type</summary>
 
 ```ts
 interface PortOutputCommandOutgoingMessage {
@@ -316,6 +358,8 @@ interface PortOutputCommandOutgoingMessage {
   readonly portOutputSubCommandData: Buffer;
 }
 ```
+
+</details>
 
 ## Development
 

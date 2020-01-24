@@ -68,7 +68,7 @@ const data = serializeOutgoingMessage({
   portInformationRequestType: 'ModeInfo'
 });
 
-assert.deepEqual(data, [5, 0, 33, 0, 1]);
+assert.deepEqual(data, Buffer.from([5, 0, 33, 0, 1]));
 ```
 
 ## API Reference

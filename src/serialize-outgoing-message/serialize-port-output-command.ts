@@ -2,16 +2,18 @@ import {PortOutputCommandOutgoingMessage} from './types';
 
 export function serializePortOutputCommand(
   outgoingMessage: PortOutputCommandOutgoingMessage
-): Buffer {
+): ArrayBuffer {
   const {portId, portOutputSubCommandData} = outgoingMessage;
-  const data = Buffer.alloc(5 + portOutputSubCommandData.length);
+  const data = new ArrayBuffer(5 + portOutputSubCommandData.byteLength);
+  const dataView = new DataView(data);
 
-  data.writeUInt8(data.length, 0);
-  data.writeUInt8(0, 1);
-  data.writeUInt8(0x81, 2);
-  data.writeUInt8(portId, 3);
-  data.writeUInt8(0x10, 4); // Execute immediately + No action
-  portOutputSubCommandData.copy(data, 5);
+  dataView.setUint8(0, data.byteLength);
+  dataView.setUint8(1, 0);
+  dataView.setUint8(2, 0x81);
+  dataView.setUint8(3, portId);
+  dataView.setUint8(4, 0x10); // Execute immediately + No action
+
+  new Uint8Array(data).set(new Uint8Array(portOutputSubCommandData), 5);
 
   return data;
 }

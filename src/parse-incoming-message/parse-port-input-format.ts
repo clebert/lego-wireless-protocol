@@ -1,12 +1,12 @@
 import {PortInputFormatIncomingMessage} from './types';
 
 export function parsePortInputFormat(
-  data: Buffer
+  dataView: DataView
 ): PortInputFormatIncomingMessage {
-  const portId = data.readUInt8(0);
-  const modeId = data.readUInt8(1);
-  const deltaInterval = data.readUInt32LE(2);
-  const notificationsEnabled = data.readUInt8(6) === 1;
+  const portId = dataView.getUint8(0);
+  const modeId = dataView.getUint8(1);
+  const deltaInterval = dataView.getUint32(2, true);
+  const notificationsEnabled = dataView.getUint8(6) === 1;
 
   return {
     messageType: 'PortInputFormat',

@@ -44,7 +44,7 @@ npm install lego-wireless-protocol --save
 import {parseIncomingMessage} from 'lego-wireless-protocol';
 
 const incomingMessage = parseIncomingMessage(
-  Buffer.from([9, 0, 4, 16, 2, 39, 0, 0, 1])
+  Uint8Array.from([9, 0, 4, 16, 2, 39, 0, 0, 1]).buffer
 );
 
 assert.deepEqual(incomingMessage, {
@@ -68,17 +68,19 @@ const data = serializeOutgoingMessage({
   portInformationRequestType: 'ModeInfo'
 });
 
-assert.deepEqual(data, Buffer.from([5, 0, 33, 0, 1]));
+assert.deepEqual([...new Uint8Array(data)], [5, 0, 33, 0, 1]);
 ```
 
 ## API Reference
 
 ```ts
-function parseIncomingMessage(data: Buffer): IncomingMessage;
+function parseIncomingMessage(data: ArrayBuffer): IncomingMessage;
 ```
 
 ```ts
-function serializeOutgoingMessage(outgoingMessage: OutgoingMessage): Buffer;
+function serializeOutgoingMessage(
+  outgoingMessage: OutgoingMessage
+): ArrayBuffer;
 ```
 
 ### `IncomingMessage`
@@ -250,7 +252,7 @@ type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
 interface PortValueIncomingMessage {
   readonly messageType: 'PortValue';
   readonly portId: number;
-  readonly valueData: Buffer;
+  readonly valueData: ArrayBuffer;
 }
 ```
 
@@ -355,7 +357,7 @@ interface PortInputFormatSetupOutgoingMessage {
 interface PortOutputCommandOutgoingMessage {
   readonly messageType: 'PortOutputCommand';
   readonly portId: number;
-  readonly portOutputSubCommandData: Buffer;
+  readonly portOutputSubCommandData: ArrayBuffer;
 }
 ```
 

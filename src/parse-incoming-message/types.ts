@@ -141,7 +141,7 @@ export type DatasetType = 'Int8' | 'Int16' | 'Int32' | 'Float' | 'Unknown';
 export interface PortValueIncomingMessage {
   readonly messageType: 'PortValue'; // 0x45
   readonly portId: number;
-  readonly valueData: Buffer;
+  readonly valueData: ArrayBuffer;
 }
 
 /**

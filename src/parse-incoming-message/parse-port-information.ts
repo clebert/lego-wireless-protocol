@@ -1,10 +1,10 @@
 import {PortInformationIncomingMessage} from './types';
 
 export function parsePortInformation(
-  data: Buffer
+  dataView: DataView
 ): PortInformationIncomingMessage {
-  const portId = data.readUInt8(0);
-  const typeId = data.readUInt8(1);
+  const portId = dataView.getUint8(0);
+  const typeId = dataView.getUint8(1);
 
   if (typeId !== 1) {
     return {
@@ -14,7 +14,7 @@ export function parsePortInformation(
     };
   }
 
-  const inputModesBitmask = data.readUInt16LE(4);
+  const inputModesBitmask = dataView.getUint16(4, true);
   const inputModeIds: number[] = [];
 
   for (let i = 0; i < 16; i += 1) {
@@ -23,7 +23,7 @@ export function parsePortInformation(
     }
   }
 
-  const outputModesBitmask = data.readUInt16LE(6);
+  const outputModesBitmask = dataView.getUint16(6, true);
   const outputModeIds: number[] = [];
 
   for (let i = 0; i < 16; i += 1) {

@@ -23,9 +23,9 @@ function createErrorCode(errorCodeId: number): ErrorCode {
   return 'Unknown';
 }
 
-export function parseError(data: Buffer): ErrorIncomingMessage {
-  const commandTypeId = data.readUInt8(0);
-  const errorCode = createErrorCode(data.readUInt8(1));
+export function parseError(dataView: DataView): ErrorIncomingMessage {
+  const commandTypeId = dataView.getUint8(0);
+  const errorCode = createErrorCode(dataView.getUint8(1));
 
   return {messageType: 'Error', commandTypeId, errorCode};
 }

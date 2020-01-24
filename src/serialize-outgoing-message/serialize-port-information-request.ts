@@ -2,15 +2,16 @@ import {PortInformationRequestOutgoingMessage} from './types';
 
 export function serializePortInformationRequest(
   outgoingMessage: PortInformationRequestOutgoingMessage
-): Buffer {
+): ArrayBuffer {
   const {portId, portInformationRequestType} = outgoingMessage;
-  const data = Buffer.alloc(5);
+  const data = new ArrayBuffer(5);
+  const dataView = new DataView(data);
 
-  data.writeUInt8(data.length, 0);
-  data.writeUInt8(0, 1);
-  data.writeUInt8(0x21, 2);
-  data.writeUInt8(portId, 3);
-  data.writeUInt8(portInformationRequestType === 'PortValue' ? 0 : 1, 4);
+  dataView.setUint8(0, data.byteLength);
+  dataView.setUint8(1, 0);
+  dataView.setUint8(2, 0x21);
+  dataView.setUint8(3, portId);
+  dataView.setUint8(4, portInformationRequestType === 'PortValue' ? 0 : 1);
 
   return data;
 }

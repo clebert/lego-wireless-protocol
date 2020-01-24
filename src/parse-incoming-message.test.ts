@@ -1,7 +1,9 @@
 import {IncomingMessage, parseIncomingMessage} from './parse-incoming-message';
 
 function assert(data: number[], incomingMessage: IncomingMessage): void {
-  expect(parseIncomingMessage(Buffer.from(data))).toEqual(incomingMessage);
+  expect(parseIncomingMessage(Uint8Array.from(data).buffer)).toEqual(
+    incomingMessage
+  );
 }
 
 describe('parseIncomingMessage()', () => {
@@ -126,13 +128,13 @@ describe('parseIncomingMessage()', () => {
     assert([5, 0, 69, 0, 0], {
       messageType: 'PortValue',
       portId: 0,
-      valueData: Buffer.from([0])
+      valueData: Uint8Array.from([0]).buffer
     });
 
     assert([8, 0, 69, 0, 0, 0, 0, 0], {
       messageType: 'PortValue',
       portId: 0,
-      valueData: Buffer.from([0, 0, 0, 0])
+      valueData: Uint8Array.from([0, 0, 0, 0]).buffer
     });
   });
 

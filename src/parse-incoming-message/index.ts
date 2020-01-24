@@ -8,24 +8,26 @@ import {IncomingMessage} from './types';
 
 export * from './types';
 
-export function parseIncomingMessage(data: Buffer): IncomingMessage {
-  const messageTypeOffset = data.readUInt8(0) > 127 ? 3 : 2;
-  const messageTypeId = data.readUInt8(messageTypeOffset);
+export function parseIncomingMessage(data: ArrayBuffer): IncomingMessage {
+  const dataView = new DataView(data);
+  const messageTypeOffset = dataView.getUint8(0) > 127 ? 3 : 2;
+  const messageTypeId = dataView.getUint8(messageTypeOffset);
   const slicedData = data.slice(messageTypeOffset + 1);
+  const slicedDataView = new DataView(slicedData);
 
   switch (messageTypeId) {
     case 0x04:
-      return parseHubAttachedIo(slicedData);
+      return parseHubAttachedIo(slicedDataView);
     case 0x05:
-      return parseError(slicedData);
+      return parseError(slicedDataView);
     case 0x43:
-      return parsePortInformation(slicedData);
+      return parsePortInformation(slicedDataView);
     case 0x44:
-      return parsePortModeInformation(slicedData);
+      return parsePortModeInformation(slicedDataView);
     case 0x45:
-      return parsePortValue(slicedData);
+      return parsePortValue(slicedDataView);
     case 0x47:
-      return parsePortInputFormat(slicedData);
+      return parsePortInputFormat(slicedDataView);
   }
 
   return {messageType: 'Unknown'};
